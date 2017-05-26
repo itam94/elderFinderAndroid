@@ -1,0 +1,34 @@
+<resources>
+    <string name="app_name">ElderFinder</string>
+
+    <!-- Strings related to login -->
+    <string name="prompt_email">Mail</string>
+    <string name="prompt_login">Login </string>
+    <string name="add_member">Add member</string>
+    <string name="check_position">Check last positions</string>
+    <string name="master">GUARDIAN</string>
+    <string name="slave">TRACKED</string>
+    <string name="properties">Properties</string>
+    <string name="prompt_password">Password (optional)</string>
+    <string name="register_password">Password</string>
+    <string name="prompt_telephoneNumber">Telephone number</string>
+    <string name="prompt_nameSurname">Name and Surname</string>
+    <string name="action_sign_in">Sign in or Register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="action_register">Register</string>
+    <string name="error_invalid_email">This email address is invalid</string>
+    <string name="error_invalid_password">This password is too short</string>
+    <string name="error_invalid_telephonenumber">This telephone number is invalid \n Correct 123456789</string>
+
+    <string name="error_notsame_password">Password don\'t match</string>
+    <string name="error_incorrect_password">This password is incorrect</string>
+    <string name="error_field_required">This field is required</string>
+
+    <string name="error_invalid_login">Login invalid</string>
+
+    <string name="error_invalid_namesurname">Invalid value. Correct{name surname}</string>
+    <string name="permission_rationale">Contacts permissions are needed for providing email
+        completions.</string>
+    <string name="continue_without_login">"Click to scan"</string>
+    <string name="title_activity_register">Register</string>
+</resources>
