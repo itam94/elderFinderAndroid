@@ -3,6 +3,8 @@ package com.telematyka.elderfinder;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
+import android.app.Activity;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
@@ -377,10 +379,12 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         protected void onPostExecute(final Boolean success) {
             mAuthTask = null;
             showProgress(false);
-
+            SharedPreferences sharedPreferences = getSharedPreferences("com.telematyka.elderfind.prefs", Activity.MODE_PRIVATE);
+            SharedPreferences.Editor edit = sharedPreferences.edit();
             if (statusResponse.getResponse().equals("passwordcorrect")) {
                 Intent mainIntent = new Intent(getApplicationContext(), MainActivity.class);
-                mainIntent.putExtra("login", statusResponse.getLogin());
+                edit.putString("login",statusResponse.getLogin());
+                edit.apply();
                 startActivity(mainIntent);
                 finish();
             } else {

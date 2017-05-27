@@ -3,6 +3,10 @@
 
     <!-- Strings related to login -->
     <string name="prompt_email">Mail</string>
+    <string name="masterNameSurnameLabel">Curator:</string>
+    <string name="slaveNameSurnameLabel">Person:</string>
+    <string name="telephoneNumberLabel">Phone number:</string>
+    <string name="dateOfBirthLabel">Birthday:</string>
     <string name="prompt_login">Login </string>
     <string name="add_member">Add member</string>
     <string name="check_position">Check last positions</string>

@@ -1,3 +1,4 @@
 <resources>
     <string name="login">http://elderfind-evmatsle.rhcloud.com/user/log</string>
+    <string name="register"></string>
 </resources>

@@ -19,12 +19,14 @@
         android:text="@string/add_member"
         android:layout_width="match_parent"
         android:layout_height="75dp"
-        android:id="@+id/add_member"/>
+        android:id="@+id/add_member"
+        android:onClick="addMember" />
     <Button
         android:text="@string/check_position"
         android:layout_width="match_parent"
         android:layout_height="75dp"
-        android:id="@+id/last_location"/>
+        android:id="@+id/last_location"
+        android:onClick="checkLastPositions" />
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="180dp"
@@ -39,7 +41,8 @@
         android:text="@string/master"
         android:layout_width="match_parent"
         android:layout_height="75dp"
-        android:id="@+id/feature"/>
+        android:id="@+id/startService"
+        android:onClick="startService" />
 
 
 

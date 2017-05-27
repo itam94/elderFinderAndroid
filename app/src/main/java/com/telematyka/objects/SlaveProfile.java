@@ -1,7 +1,9 @@
 package com.telematyka.objects;
 
 
-public class SlaveProfile extends Slave {
+import java.io.Serializable;
+
+public class SlaveProfile extends Slave{
     private String telephoneNumber;
     private String masterNameSurname;
 

@@ -12,6 +12,15 @@ import org.springframework.web.client.RestTemplate;
 import com.google.gson.Gson;
 import com.google.zxing.Result;
 import com.telematyka.objects.SlaveProfile;
+import com.telematyka.objects.StatusResponse;
+
+import java.io.BufferedInputStream;
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+
 import me.dm7.barcodescanner.zxing.ZXingScannerView;
 
 
@@ -39,7 +48,7 @@ public class ScanActivity extends AppCompatActivity implements ZXingScannerView.
 
     }
 
-    private class HttpRequest extends AsyncTask <Void,Void,SlaveProfile>{
+    private class HttpRequest extends AsyncTask <Void,Void,String>{
 
         String slaveid;
 
@@ -48,13 +57,38 @@ public class ScanActivity extends AppCompatActivity implements ZXingScannerView.
         }
 
         @Override
-        protected SlaveProfile doInBackground(Void... voids) {
+        protected String doInBackground(Void... voids) {
             try{
-                final String url = "http://elderfind-evmatsle.rhcloud.com/slave/find/" + slaveid;
+                Gson gson = new Gson();
+
+                URL url = new URL("http://elderfind-evmatsle.rhcloud.com/slave/find/itamus1");
+                final HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+
+                conn.setConnectTimeout(5000);
+                conn.setRequestProperty("Content-Type", "text/plain; charset=UTF-8");
+                conn.setDoOutput(false);
+                conn.setDoInput(true);
+                conn.setRequestMethod("GET");
+                String result = "";
+                InputStream in = new BufferedInputStream(conn.getInputStream());
+                InputStreamReader inR = new InputStreamReader(in);
+                BufferedReader buf = new BufferedReader(inR);
+                String line;
+                while ((line = buf.readLine()) != null) {
+                    result = result + line;
+                }
+                SlaveProfile slaveProfile = gson.fromJson(result,SlaveProfile.class);
+                in.close();
+                conn.disconnect();
+                Log.w("response:",result);
+
+                /*
+                final String url = "http://elderfind-evmatsle.rhcloud.com/slave/find/itamus1";//" + slaveid;
                 RestTemplate restTemplate = new RestTemplate();
-                restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
-                SlaveProfile slaveProfile = restTemplate.getForObject(url, SlaveProfile.class);
-                return slaveProfile;
+
+                restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());*/
+              //  SlaveProfile slaveProfile = restTemplate.getForObject(url, SlaveProfile.class);
+                return result;
             }catch (Exception e){
                 Log.e("error:",e.getMessage());
             }
@@ -63,12 +97,12 @@ public class ScanActivity extends AppCompatActivity implements ZXingScannerView.
         }
 
         @Override
-        protected void onPostExecute(SlaveProfile slaveProfile){
+        protected void onPostExecute(String slaveProfile){
             Gson gson = new Gson();
             Intent slaveProfileIntent = new Intent(getApplicationContext(),SlaveProfileActivity.class);
-            slaveProfileIntent.putExtra("profile",gson.toJson(slaveProfile));
+            slaveProfileIntent.putExtra("profile",slaveProfile);//gson.toJson(slaveProfile));
             startActivity(slaveProfileIntent);
-
+            mScannerView.stopCamera();
             finish();
         }
     }
